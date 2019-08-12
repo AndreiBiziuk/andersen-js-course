@@ -29,6 +29,7 @@ import { task10Old, task10New } from './es-features/task10';
 
 import { any } from './array-practice/task1';
 import { arrayDiff } from './array-practice/task2';
+import { forEachRight } from './array-practice/task3';
 
 console.log('task1 old', task1Old(10) === 500); // true
 console.log('task1 new', task1New(10) === 500); // true
@@ -88,5 +89,9 @@ console.log('=============');
 
 console.log('task2 arrays', arrayDiff([1, 2, 3], [1, 2, 4]));
 console.log('task2 arrays', arrayDiff([1, 3, 3, 4], [1, 3, '4']));
+
+console.log('=============');
+
+console.log('task3 arrays', forEachRight([1, 2, 3, 4], val => console.log(val)));
 
 console.log('=============');
