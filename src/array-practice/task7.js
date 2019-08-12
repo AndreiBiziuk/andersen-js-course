@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 /**
  * Реализовать функцию take в этом файле, и экспортировать ее.
  *
@@ -11,3 +12,7 @@
  * console.log(take([1, 2, 3], 5)); -> [1, 2, 3]
  * console.log(take([1, 2, 3], 2)); -> [1, 2]
  */
+
+export function take(list, elemN) {
+  return list.slice(0, elemN);
+}
