@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 /**
  * Реализовать функцию transformArrayToNumber в этом файле, и экспортировать ее.
  *
@@ -17,6 +18,14 @@
  * console.log(transformArrayToNumber([10, 20, 30], (acc, item) => acc + item)); -> 60
  * console.log(transformArrayToNumber([10, 20, 30], (acc, item) => acc + item, 10)); -> 70
  * console.log(transformArrayToNumber([10, 20, 30], (acc, item) => acc * item)); -> 0
- * console.log(transformArrayToNumber([10, 20, 30], (acc, item) => acc * item), 1); -> 6000
+ * console.log(transformArrayToNumber([10, 20, 30], (acc, item) => acc * item, 1)); -> 6000
  * console.log(transformArrayToNumber([10, 20, 30], (acc, item) => acc - item)); -> -60
  */
+
+export function transformArrayToNumber(list, func, start = 0) {
+  let acc = start;
+  list.forEach(x => {
+    acc = func(acc, x);
+  });
+  return acc;
+}
