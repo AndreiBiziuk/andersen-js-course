@@ -36,6 +36,7 @@ import { transformArrayToNumber } from './array-practice/task6';
 import { take } from './array-practice/task7';
 import { without } from './array-practice/task8';
 import { indexOfAll } from './array-practice/task9';
+import { meetups, membersOnActiveMeetups } from './array-practice/task10';
 
 console.log('task1 old', task1Old(10) === 500); // true
 console.log('task1 new', task1New(10) === 500); // true
@@ -102,8 +103,8 @@ console.log('task3 arrays', forEachRight([1, 2, 3, 4], val => console.log(val)))
 
 console.log('=============');
 
-console.log('task4 arrays',union([5, 1, 2, 3, 3], [4, 3, 2]));
-console.log('task4 arrays',union([5, 1, 3, 3, 4], [1, 3, 4]));
+console.log('task4 arrays', union([5, 1, 2, 3, 3], [4, 3, 2]));
+console.log('task4 arrays', union([5, 1, 3, 3, 4], [1, 3, 4]));
 
 console.log('=============');
 
@@ -131,10 +132,14 @@ console.log('task7 arrays', take([1, 2, 3], 2));
 
 console.log('=============');
 
-console.log('task8 arrays', without([2, 1, 2, 3], 1, 2))
-console.log('task8 arrays', without([2, 1, 10, 20], 1, 2))
+console.log('task8 arrays', without([2, 1, 2, 3], 1, 2));
+console.log('task8 arrays', without([2, 1, 10, 20], 1, 2));
 
 console.log('=============');
 
 console.log('task9 arrays', indexOfAll([1, 2, 3, 1, 2, 3], 1));
 console.log('task9 arrays', indexOfAll([1, 2, 3], 4));
+
+console.log('=============');
+
+console.log('task10 arrays', membersOnActiveMeetups(meetups));
