@@ -18,6 +18,5 @@
  */
 
 export function arrayDiff(list1, list2) {
-  const intersection = list1.filter(x => list2.includes(x));
-  return [...list1, ...list2].filter(x => !intersection.includes(x));
+  return [...list1, ...list2].filter(x => !(list1.includes(x) && list2.includes(x)));
 }
