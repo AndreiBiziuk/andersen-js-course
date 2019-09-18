@@ -23,9 +23,5 @@
  */
 
 export function transformArrayToNumber(list, func, start = 0) {
-  let acc = start;
-  list.forEach(x => {
-    acc = func(acc, x);
-  });
-  return acc;
+  return list.reduce(func, start);
 }
