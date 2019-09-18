@@ -14,5 +14,5 @@
  */
 
 export function without(list, ...rest) {
-  return list.filter(x => rest.find(y => y === x) === undefined);
+  return list.filter(x => !rest.includes(x));
 }
