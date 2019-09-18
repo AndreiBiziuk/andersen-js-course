@@ -17,9 +17,10 @@
 
 export function createGenerator(list) {
   let current = 0;
+  const listCopy = [...list];
   const obj = {
-    next: function() {
-      return current < list.length ? list[current++] : 'Complete!';
+    next() {
+      return current < listCopy.length ? listCopy[current++] : 'Complete!';
     },
   };
 
