@@ -13,11 +13,5 @@
  */
 
 export function indexOfAll(list, value) {
-  const indices = [];
-  list.forEach(function(x, index) {
-    if (x === value) {
-      indices.push(index);
-    }
-  });
-  return indices;
+  return list.reduce((inds, x, i) => (x === value ? inds.concat(i) : inds), []);
 }
