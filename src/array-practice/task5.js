@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 /**
  * Реализовать функцию createGenerator в этом файле, и экспортировать ее.
  *
@@ -13,3 +14,15 @@
  * generator.next(); -> 'Complete!'
  * generator.next(); -> 'Complete!'
  */
+
+export function createGenerator(list) {
+  let current = 0;
+  const listCopy = [...list];
+  const obj = {
+    next() {
+      return current < listCopy.length ? listCopy[current++] : 'Complete!';
+    },
+  };
+
+  return obj;
+}

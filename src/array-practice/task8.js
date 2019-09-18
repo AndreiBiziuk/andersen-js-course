@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 /**
  * Реализовать функцию without в этом файле, и экспортировать ее.
  *
@@ -11,3 +12,7 @@
  * console.log(without([2, 1, 2, 3], 1, 2)) -> [3]
  * console.log(without([2, 1, 10, 20], 1, 2)) -> [10, 20]
  */
+
+export function without(list, ...rest) {
+  return list.filter(x => !rest.includes(x));
+}
