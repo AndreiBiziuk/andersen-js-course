@@ -17,5 +17,5 @@
  */
 
 export function any(list, func = x => x == true) {
-  return list.find(func) !== undefined;
+  return list.some(func);
 }
