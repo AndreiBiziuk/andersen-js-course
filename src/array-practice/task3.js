@@ -12,5 +12,5 @@
  */
 
 export function forEachRight(list, func) {
-  return list.reverse().map(func);
+  [...list].reverse().forEach(func);
 }
