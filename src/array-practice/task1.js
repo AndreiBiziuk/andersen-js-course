@@ -16,6 +16,6 @@
  * console.log(any([0, 0, 0, 0])); -> false
  */
 
-export function any(list, func = x => x == true) {
+export function any(list, func = Boolean) {
   return list.some(func);
 }
