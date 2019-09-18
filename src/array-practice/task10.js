@@ -19,11 +19,5 @@ export const meetups = [
 ];
 
 export function membersOnActiveMeetups(meetups) {
-  let result = 0;
-  meetups.forEach(x => {
-    if (x.isActive) {
-      result += x.members;
-    }
-  });
-  return result;
+  return meetups.reduce((c, m) => (m.isActive ? c + m.members : c), 0);
 }
