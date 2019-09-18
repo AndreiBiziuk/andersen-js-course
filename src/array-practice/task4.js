@@ -9,10 +9,4 @@
  * console.log(union([5, 1, 3, 3, 4], [1, 3, 4])); -> [5, 1, 3, 4]
  */
 
-export function union(list1, list2) {
-  const u = new Set(list1);
-  list2.forEach(x => {
-    u.add(x);
-  });
-  return [...u];
-}
+export const union = (a, b) => Array.from(new Set([...a, ...b]));
