@@ -38,14 +38,12 @@ export function task4New() {
     return 'test';
   }
 
-  const obj = {
+  return {
     x,
     y,
     bar() {
       return this.x + this.y;
     },
-    ['baz' + foo()]: 'new field',
+    [`baz${foo()}`]: 'new field',
   };
-
-  return obj;
 }
