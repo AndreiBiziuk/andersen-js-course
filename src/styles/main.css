@@ -6,3 +6,102 @@ body {
 h1 {
   text-align: center;
 }
+
+#inventory-title{
+  clear:both;
+  width:100%;
+  text-align: center;
+  margin:10px;
+}
+
+#inventory-container{
+  display:flex;
+  flex-wrap: wrap;
+  border: 1px dotted gray;
+  min-height: 100px;
+}
+
+.inventory-item{
+  border:1px solid gray;
+  margin:2px;
+  width:100px;
+  height:100px;
+}
+
+#recipes-title{
+  clear:both;
+  width:100%;
+  text-align: center;
+  margin:10px;
+}
+
+#recipes-container{
+  display:flex;
+  flex-wrap: wrap;
+  border: 1px dotted gray;
+  min-height: 100px;
+}
+
+.recipes-item{
+  border:1px solid gray;
+  margin:2px;
+  width:100px;
+  height:100px;
+}
+
+#crafting-container{
+  display:flex;
+  justify-content: center;
+}
+
+#crafting-title{
+  clear:both;
+  width:100%;
+  text-align: center;
+  margin:10px;
+}
+
+#crafting-field{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* grid-column-gap: 2px;
+  grid-row-gap: 2px; */
+  border:2px solid green;
+  /* padding: 2px; */
+  width:300px;
+  height:300px;
+}
+
+.crafting-item{
+  border-width:5px;
+  border-color: lightgrey;
+  border-style: inset;
+  width:auto;
+  height:auto;
+  background-color:whitesmoke;
+}
+
+#crafting-result-container{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width:200px;
+}
+
+#arrow{
+  text-align: center;
+  color:grey;
+  line-height: 100px;
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 2;
+  grid-row-end: 2;
+  font-size: 3em;
+}
+
+#crafting-result-item{
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 2;
+}
