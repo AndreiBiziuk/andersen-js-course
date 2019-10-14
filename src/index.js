@@ -1,25 +1,68 @@
 import './styles/main.css';
+import { empty } from './helper/helpers';
+import InventoryModel from './model/InventoryModel';
+import InventoryView from './view/InventoryView';
+import InventoryController from './controller/InventoryController';
+import CraftTableModel from './model/CraftTableModel';
+import CraftTableView from './view/CraftTableView';
+import CraftTableController from './controller/CraftTableController';
+import ReceipeListModel from './model/ReceipeListModel';
+import ReceipeListView from './view/ReceipeListView';
+import ReceipeListController from './controller/ReceipeListController';
 
-import ItemModel from './model/ItemModel';
-import ItemView from './view/ItemView';
-// import * as IC from './controller/ItemController';
+const inventoryModel = new InventoryModel([]);
+const inventoryView = new InventoryView();
+const inventoryController = new InventoryController(inventoryModel, inventoryView);
 
-function addInventoryItem(name, text, quantity) {
-  const inventory = document.getElementById('inventory-container');
-  const invItemModel = new ItemModel(name, text, quantity);
-  const invItemView = new ItemView(invItemModel, { parent: inventory });
-  // const invItemController = new IC.ItemController(invItemModel, invItemView);
-  invItemModel.addClass('inventory-item');
-  invItemView.show();
-}
+const craftTableModel = new CraftTableModel([]);
+const craftTableView = new CraftTableView();
+const craftTableController = new CraftTableController(craftTableModel, craftTableView);
 
-document.getElementById('addInventoryItem').addEventListener('click', () => {
-  addInventoryItem('elem', 'test');
-});
+const receipeListModel = new ReceipeListModel([]);
+const receipeListView = new ReceipeListView();
+const receipeListController = new ReceipeListController(receipeListModel, receipeListView);
+
+craftTableController.connectReceipeList(receipeListController);
+receipeListController.connectCraftTable(craftTableController);
+inventoryController.connectCraftTable(craftTableController);
 
 window.addEventListener('load', () => {
-  addInventoryItem('wood', 'Wood', 25);
-  addInventoryItem('stone', 'Stone', 4);
-  addInventoryItem('iron', 'Iron', 1);
-  addInventoryItem('water', 'Water', 7);
+  inventoryController.addItem('Wood');
+  inventoryController.addItem('Stone');
+  inventoryController.addItem('Steel');
+  inventoryController.addItem('Water');
+
+  craftTableController.addItem(empty);
+  craftTableController.addItem(empty);
+  craftTableController.addItem(empty);
+  craftTableController.addItem(empty);
+  craftTableController.addItem(empty);
+  craftTableController.addItem(empty);
+  craftTableController.addItem(empty);
+  craftTableController.addItem(empty);
+  craftTableController.addItem(empty);
+
+  receipeListController.addItem('Stone hammer', [
+    'Stone',
+    'Stone',
+    'Stone',
+    empty,
+    'Wood',
+    empty,
+    empty,
+    'Wood',
+    empty,
+  ]);
+
+  receipeListController.addItem('Steel sword', [
+    empty,
+    empty,
+    'Steel',
+    empty,
+    'Steel',
+    empty,
+    'Wood',
+    empty,
+    empty,
+  ]);
 });
