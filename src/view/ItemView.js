@@ -1,34 +1,82 @@
-import { EventEmitter } from 'events';
+import { EventEmitter, createElement } from '../helper/helpers';
 
-export default class ItemView extends EventEmitter {
-  constructor(model, elements) {
+class ItemView extends EventEmitter {
+  constructor(props) {
     super();
-    this.model = model;
-    this.elements = elements;
-    this.rebuildItem();
-    model.on('itemChanged', () => this.rebuildItem());
+    this.parent = props.parent;
+    this.item = createElement(
+      'div',
+      {
+        className: props.class,
+        'data-id': props.id,
+        draggable: props.draggable,
+        'data-name': props.name,
+        'data-type': props.type,
+      },
+      props.name
+    );
+
+    this.item.addEventListener('click', this.handleClick.bind(this));
+    this.item.addEventListener('dragstart', this.handleDragStart.bind(this));
+    this.item.addEventListener('dragover', this.handleDragOver.bind(this));
+    this.item.addEventListener('dragend', this.handleDragEnd.bind(this));
+    this.item.addEventListener('drop', this.handleDrop.bind(this));
   }
 
   show() {
-    if ({}.hasOwnProperty.call(this.elements, 'item') && this.elements.item !== undefined) {
-      this.elements.item.outerHTML = this.item.outerHTML;
-    } else if (
-      {}.hasOwnProperty.call(this.elements, 'parent') &&
-      this.elements.parent !== undefined
-    ) {
-      this.elements.parent.appendChild(this.item);
-      this.elements.item = this.item;
-    }
+    this.parent.appendChild(this.item);
   }
 
-  rebuildItem() {
-    const item = document.createElement('div');
-    const attrs = this.model.getAttributes();
-    Object.keys(attrs).forEach(attr => {
-      item.setAttribute(attr, attrs[attr]);
-    });
-    const quantity = this.model.itemQuantity;
-    item.innerHTML = `${this.model.getText()}${quantity > 1 ? ` * ${quantity}` : ''}`;
-    this.item = item;
+  edit(props) {
+    this.item.textContent = props.name;
+  }
+
+  remove() {
+    this.parent.removeChild(this.item);
+  }
+
+  replace(item) {
+    this.parent.replaceChild(this.item, item);
+  }
+
+  handleClick() {
+    const id = this.item.getAttribute('data-id');
+    this.emit('click', id);
+  }
+
+  handleDragStart(event) {
+    const dt = event.dataTransfer;
+    const id = this.item.getAttribute('data-id');
+    const name = this.item.getAttribute('data-name');
+    const type = this.item.getAttribute('data-type');
+
+    dt.setData(`application/x.${type}`, name);
+    dt.setData('text/plain', name);
+
+    this.emit('dragStart', id);
+  }
+
+  handleDragOver(event) {
+    const dt = event.dataTransfer;
+    const id = this.item.getAttribute('data-id');
+
+    event.preventDefault();
+    dt.dropEffect = 'copy';
+
+    this.emit('dragOver', { id, types: dt.types, name: dt.getData(dt.types[0]) });
+  }
+
+  handleDragEnd(event) {
+    const dt = event.dataTransfer;
+    const id = this.item.getAttribute('data-id');
+    this.emit('dragEnd', { id, effect: dt.dropEffect, name: dt.getData(dt.types[0]) });
+  }
+
+  handleDrop(event) {
+    const dt = event.dataTransfer;
+    const id = this.item.getAttribute('data-id');
+    this.emit('drop', { id, types: dt.types, name: dt.getData(dt.types[0]) });
   }
 }
+
+export default ItemView;
