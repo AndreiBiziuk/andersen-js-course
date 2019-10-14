@@ -26,27 +26,29 @@ h1 {
   margin:2px;
   width:100px;
   height:100px;
+  text-align: center;
 }
 
-#recipes-title{
+#receipes-title{
   clear:both;
   width:100%;
   text-align: center;
   margin:10px;
 }
 
-#recipes-container{
+#receipes-container{
   display:flex;
   flex-wrap: wrap;
   border: 1px dotted gray;
   min-height: 100px;
 }
 
-.recipes-item{
+.receipes-item{
   border:1px solid gray;
   margin:2px;
   width:100px;
   height:100px;
+  text-align: center;
 }
 
 #crafting-container{
@@ -61,7 +63,7 @@ h1 {
   margin:10px;
 }
 
-#crafting-field{
+#crafting-table{
   display:grid;
   grid-template-columns: repeat(3, 1fr);
   /* grid-column-gap: 2px;
@@ -79,6 +81,7 @@ h1 {
   width:auto;
   height:auto;
   background-color:whitesmoke;
+  text-align: center;
 }
 
 #crafting-result-container{
@@ -99,9 +102,26 @@ h1 {
   font-size: 3em;
 }
 
-#crafting-result-item{
+.crafting-result-item{
   grid-column-start: 2;
   grid-column-end: 2;
   grid-row-start: 2;
   grid-row-end: 2;
+}
+
+#craft-buttons-container{
+  text-align: center;
+  margin:3px;
+}
+
+#clear-craft-button{
+  margin:3px;
+}
+
+#new-recepe-button{
+  margin:3px;
+}
+
+#craft-button{
+  margin:3px;
 }
