@@ -8,11 +8,17 @@ class CraftTableView extends EventEmitter {
     this.result = {};
     this.craftTable = document.getElementById('crafting-table');
     this.craftResult = document.getElementById('crafting-result-container');
-    this.clearButton = document.getElementById('clear-craft-button');
     this.craftButton = document.getElementById('craft-button');
+    this.clearButton = document.getElementById('clear-craft-button');
+    this.newRecipeButton = document.getElementById('new-recipe-button');
+    this.saveRecipeButton = document.getElementById('recipe-name-confirm');
+    this.cancelRecipeButton = document.getElementById('recipe-name-cancel');
 
     this.clearButton.addEventListener('click', this.handleClearCraft.bind(this));
     this.craftButton.addEventListener('click', this.handleCraft.bind(this));
+    this.newRecipeButton.addEventListener('click', this.handleNewRecipe.bind(this));
+    this.saveRecipeButton.addEventListener('click', this.handleSaveRecipe.bind(this));
+    this.cancelRecipeButton.addEventListener('click', this.handleCancelRecipe.bind(this));
   }
 
   show(items) {
@@ -99,6 +105,40 @@ class CraftTableView extends EventEmitter {
 
   handleCraft() {
     this.emit('craft');
+  }
+
+  handleNewRecipe() {
+    const recipeNameForm = document.getElementById('recipe-name-container');
+    recipeNameForm.classList.remove('hidden');
+    this.emit('changed');
+  }
+
+  handleSaveRecipe() {
+    const recipeNameInput = document.getElementById('recipe-name');
+    const recipeName = recipeNameInput.value;
+    this.emit('saveRecipe', recipeName);
+  }
+
+  handleCancelRecipe() {
+    const recipeNameForm = document.getElementById('recipe-name-container');
+    recipeNameForm.classList.add('hidden');
+    this.emit('changed');
+  }
+
+  showError(message) {
+    const messageContainer = document.getElementById('message-container');
+    messageContainer.innerHTML = message;
+    messageContainer.classList.remove('message-success');
+    messageContainer.classList.add('message-error');
+    this.emit('changed');
+  }
+
+  showSuccess(message) {
+    const messageContainer = document.getElementById('message-container');
+    messageContainer.innerHTML = message;
+    messageContainer.classList.add('message-success');
+    messageContainer.classList.remove('message-error');
+    this.emit('changed');
   }
 }
 
