@@ -13,20 +13,25 @@ class CraftTableController extends EventEmitter {
     view.on('drop', this.handleDrop.bind(this));
     view.on('clearCraft', this.handleClearCraft.bind(this));
     view.on('craft', this.handleCraft.bind(this));
+    view.on('saveRecipe', this.handleSaveRecipe.bind(this));
 
     this.view.addResult(this.model.getResult());
 
     view.show(model.items);
   }
 
-  connectReceipeList(receipeListController) {
-    receipeListController.on('craftSuccess', itemName => {
+  connectRecipeList(recipeListController) {
+    recipeListController.on('craftSuccess', itemName => {
       this.emit('craftSuccess', itemName);
     });
 
-    receipeListController.on('receipeResult', itemName => {
+    recipeListController.on('recipeResult', itemName => {
       this.view.editResult(this.model.setResult({ name: itemName }));
     });
+
+    recipeListController.on('changed', this.handleRecipesChanged.bind(this));
+    recipeListController.on('duplicate', this.handleDuplicateRecipe.bind(this));
+    recipeListController.on('saved', this.handleRecipeSaved.bind(this));
   }
 
   addItem(title) {
@@ -88,6 +93,32 @@ class CraftTableController extends EventEmitter {
   handleCraft() {
     const { items } = this.model;
     this.emit('tryCraft', items);
+  }
+
+  handleSaveRecipe(name) {
+    const items = [];
+    this.model.items.forEach(item => items.push(item.name));
+
+    if (String(name).trim().length > 0) {
+      this.emit('saveRecipe', { name, recipe: items });
+    } else {
+      this.view.showError('Recipe name cannot be empty!');
+    }
+  }
+
+  handleRecipesChanged() {
+    const { items } = this.model;
+    this.emit('changeTable', items);
+  }
+
+  handleRecipeSaved() {
+    this.view.showSuccess('Recipe have been added!');
+    const { items } = this.model;
+    this.emit('changeTable', items);
+  }
+
+  handleDuplicateRecipe() {
+    this.view.showError('Duplicate recipe name!');
   }
 }
 
