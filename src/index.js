@@ -6,9 +6,9 @@ import InventoryController from './controller/InventoryController';
 import CraftTableModel from './model/CraftTableModel';
 import CraftTableView from './view/CraftTableView';
 import CraftTableController from './controller/CraftTableController';
-import ReceipeListModel from './model/ReceipeListModel';
-import ReceipeListView from './view/ReceipeListView';
-import ReceipeListController from './controller/ReceipeListController';
+import RecipeListModel from './model/RecipeListModel';
+import RecipeListView from './view/RecipeListView';
+import RecipeListController from './controller/RecipeListController';
 
 const inventoryModel = new InventoryModel([]);
 const inventoryView = new InventoryView();
@@ -18,12 +18,12 @@ const craftTableModel = new CraftTableModel([]);
 const craftTableView = new CraftTableView();
 const craftTableController = new CraftTableController(craftTableModel, craftTableView);
 
-const receipeListModel = new ReceipeListModel([]);
-const receipeListView = new ReceipeListView();
-const receipeListController = new ReceipeListController(receipeListModel, receipeListView);
+const recipeListModel = new RecipeListModel([]);
+const recipeListView = new RecipeListView();
+const recipeListController = new RecipeListController(recipeListModel, recipeListView);
 
-craftTableController.connectReceipeList(receipeListController);
-receipeListController.connectCraftTable(craftTableController);
+craftTableController.connectRecipeList(recipeListController);
+recipeListController.connectCraftTable(craftTableController);
 inventoryController.connectCraftTable(craftTableController);
 
 window.addEventListener('load', () => {
@@ -42,7 +42,7 @@ window.addEventListener('load', () => {
   craftTableController.addItem(empty);
   craftTableController.addItem(empty);
 
-  receipeListController.addItem('Stone hammer', [
+  recipeListController.addItem('Stone hammer', [
     'Stone',
     'Stone',
     'Stone',
@@ -54,7 +54,7 @@ window.addEventListener('load', () => {
     empty,
   ]);
 
-  receipeListController.addItem('Steel sword', [
+  recipeListController.addItem('Steel sword', [
     empty,
     empty,
     'Steel',
