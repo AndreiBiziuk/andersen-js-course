@@ -9,6 +9,7 @@ class RecipeListController extends EventEmitter {
     view.on('add', this.addItem.bind(this));
     view.on('edit', this.editItem.bind(this));
     view.on('remove', this.removeItem.bind(this));
+    view.on('clickRecipe', this.handleClickRecipe.bind(this));
 
     model.on('duplicate', this.handleDuplicate.bind(this));
 
@@ -64,6 +65,13 @@ class RecipeListController extends EventEmitter {
 
   handleDuplicate() {
     this.emit('duplicate');
+  }
+
+  handleClickRecipe(id) {
+    const recipe = this.model.getItem(id);
+    if (recipe) {
+      this.emit('fillRecipe', recipe.recipe);
+    }
   }
 }
 
