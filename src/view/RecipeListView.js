@@ -49,7 +49,7 @@ class RecipeListView extends EventEmitter {
   }
 
   addEventListeners(recipeItem) {
-    // recipeItem.on('click', this.handleRemove.bind(this));
+    recipeItem.on('click', this.handleClick.bind(this));
     recipeItem.on('dragOver', this.handleDragOver.bind(this));
     recipeItem.on('dragEnd', this.handleDragEnd.bind(this));
     recipeItem.on('drop', this.handleDrop.bind(this));
@@ -66,6 +66,10 @@ class RecipeListView extends EventEmitter {
 
   handleDrop(params) {
     this.emit('drop', params);
+  }
+
+  handleClick(id) {
+    this.emit('clickRecipe', id);
   }
 }
 
